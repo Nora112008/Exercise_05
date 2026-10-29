@@ -1,0 +1,40 @@
+@media (max-width: 1300px) {
+#Register .container .head img{
+    width: 30%;
+}
+#Register form{
+    width: 280px;
+}
+#Data .buttons{
+    display: flex;
+}
+#Data .buttons button{
+    margin: 0px 5px;
+}
+}
+@media (min-width: 371px) and (max-width: 1300px) {}
+@media (min-width: 577px) and (max-width: 1300px) {
+    #Register .container .head img{
+    width: 25%;
+}
+#Register form{
+    width: 350px;
+}
+}
+@media (min-width: 769px) and (max-width: 1300px) {
+    #Register .container .head img{
+    width: 20%;
+}
+#Register form{
+    width: 400px;
+}
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+    #Register .container .head img{
+    width: 15%;
+}
+#Register form{
+    width: 500px;
+}
+}
+@media (min-width: 1181px) and (max-width: 1300px) {}
