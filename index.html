@@ -11,39 +11,41 @@
     <link rel="stylesheet" href="./css/index.responsive.css">
 </head>
 <body>
+    
     <section id="Register" class="py-5">
         <div class="container">
             <div class="head mb-5 text-center">
                 <img src="./images/logo-be01d065.png" alt="">
             </div>
             <div class="body">
-                <form action="" class="m-auto p-4 rounded-4">
+                <form action="" class="m-auto p-4 rounded-4" data-type="add">
+                    <i class="fa-solid fa-rotate-left reset d-none" onclick="resetForm()"></i>
                     <h4 class="mb-4 text-center">Students System</h4>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" name="firstName" placeholder="First Name *">
+                        <input type="text" class="form-control" name="firstName" placeholder="First Name *" onblur="checkInput(this)" data-valid="false">
                     </div>
-                    <p class="alert alert-warning d-none" data-error-name="firstName" role="alert"></p>
+                    <p class="alert alert-danger d-none" data-error-name="firstName" role="alert"></p>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" class="form-control" name="lastName" placeholder="Last Name *">
+                        <input type="text" class="form-control" name="lastName" placeholder="Last Name *" onblur="checkInput(this)" data-valid="false">
                     </div>
-                    <p class="alert alert-warning d-none" data-error-name="lastName" role="alert"></p>
+                    <p class="alert alert-danger d-none" data-error-name="lastName" role="alert"></p>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="text" class="form-control" data-error-name="email" name="email" placeholder="Email *">
+                        <input type="text" class="form-control"  name="email" placeholder="Email *" onblur="checkInput(this)" data-valid="false">
                     </div>
-                    <p class="alert alert-warning d-none" role="alert"></p>
+                    <p class="alert alert-danger d-none" data-error-name="email" role="alert"></p>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></span>
-                        <input type="text" class="form-control" data-error-name="age" name="age" placeholder="Age *">
+                        <input type="text" class="form-control" name="age" placeholder="Age *" onblur="checkInput(this)" data-valid="false">
                     </div>
-                    <p class="alert alert-warning d-none" role="alert"></p>
+                    <p class="alert alert-danger d-none"  data-error-name="age" role="alert"></p>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-mobile-button"></i></span>
-                        <input type="text" class="form-control" data-error-name="phone" name="phone" placeholder="Phone *">
+                        <input type="text" class="form-control"  name="phone" placeholder="Phone *" onblur="checkInput(this)" data-valid="false">
                     </div>
-                    <p class="alert alert-warning d-none" role="alert"></p>
+                    <p class="alert alert-danger d-none" data-error-name="phone" role="alert"></p>
                     <button class="btn btn-success w-100">Add</button>
                 </form>
             </div>
@@ -52,7 +54,7 @@
     <section id="Search">
                     <div class="input-group mb-3">
                         <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" class="form-control" name="search" placeholder="Search...">
+                        <input type="text" class="form-control" id="SearchInput" name="search" placeholder="Search..." onblur="checkInput(this)">
                     </div>
     </section>
 
@@ -71,25 +73,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>
-        <div class="buttons">
-            <button class="btn btn-info text-light">Edit</button>
-            <button class="btn btn-danger text-light">Delete</button>
-        </div>
-      </td>
-    </tr>
+   <tr>
+    <td id="TableAlert" class="table-warning text-center" colspan="7">There are no data</td>
+   </tr>
   </tbody>
 </table>
         </div>
     </section>
 
+     <div class="popup">
+        <div class="box">
+            <h3 class="text-center text-black">Are you sure?</h3>
+            <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-success" id="yes">Yes</button>
+                <button class="btn btn-danger" id="no">No</button>
+            </div>
+        </div>
+    </div>
 
     <script src="./js/bootstrap.js"></script>
     <script src="./js/functions.js"></script>
