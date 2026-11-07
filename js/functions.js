@@ -113,7 +113,7 @@ function checkInput(input){
 }
 
 
-function resetForm(){
+function resetForm(skip = ""){
     registerForm.reset();
     
     let formBtn = registerForm.querySelector("button");
@@ -128,6 +128,26 @@ function resetForm(){
     registerForm.setAttribute('data-type', 'add');
         formBtn.classList.remove('btn-info', 'text-light');
         formBtn.classList.add('btn-success');
+        formBtn.textContent = "Add"; 
+
+    if (searchInput) {
+        searchInput.removeAttribute("disabled");
+    }
+
+    if (skip === "skipTable") {
+        let allTableButtons = tableBody.querySelectorAll("button");
+        allTableButtons.forEach(function(btn) {
+            btn.removeAttribute("disabled"); 
+            if(btn.textContent === "Undo") {
+                btn.textContent = "Edit";
+                btn.classList.remove("btn-warning");
+                btn.classList.add("btn-info", "text-light");
+                btn.setAttribute("onclick", btn.getAttribute("onclick").replace("resetForm()", `insertStudentIntoForm` + btn.closest('tr').dataset.studentId));
+            }
+        });
+    } else {
+        showStudents(students);
+    }
 }
 
 function updateLocalstorage(){
@@ -217,6 +237,20 @@ function insertStudentIntoForm(id){
     registerForm.setAttribute('data-student-id', id);
      searchInput.value = "";
     searchInput.setAttribute("disabled", "");
+     let allTableButtons = tableBody.querySelectorAll("button");
+    allTableButtons.forEach(function(btn){
+        btn.setAttribute("disabled", "")
+    })
+     let trEle = tableBody.querySelector(`tr[data-student-id="${id}"]`);
+    let editBtnInTable = trEle.querySelector("button.btn-info"); 
+    
+    if (editBtnInTable) {
+        editBtnInTable.removeAttribute("disabled"); 
+        editBtnInTable.textContent = "Undo";
+        editBtnInTable.classList.remove("btn-info", "text-light");
+        editBtnInTable.classList.add("btn-primary"); 
+        editBtnInTable.setAttribute("onclick", "resetForm()"); 
+    }
 }
 
 function editStudent(){
@@ -265,12 +299,13 @@ function editStudent(){
         resetIcon.classList.add("d-none");
         trEle.classList.add("table-success");
         setTimeout(function () {
-        trEle.classList.remove("table-success");
+        trEle.className = "";
     }, 700);
 
         updateLocalstorage();
         
-        resetForm();
+        resetForm("skipTable");
+        isNoData(students);
     }
 }
 
